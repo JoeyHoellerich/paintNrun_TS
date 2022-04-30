@@ -30,6 +30,50 @@ h1 {
     background-color: white;
     border: 3px solid black;
 }
+
+/* PAINT SELECTOR */
+/* ----------------------------------------------- */
+/* Colors */
+/* 1. Pink ( #edadc7 ) */
+/* 2. Blue ( #00c2d1 )  */
+/* 3. Green ( #77E6AB ) */
+/* 4. Red ( #f24236 ) */
+
+/* Style for the paint Selector Container */
+#paintContainer{
+    display: flex;
+    justify-content: center;
+    padding: 80px;
+}
+
+/* Style for paint selectors */
+.paint {
+    width: 200px;
+    height: 170px;
+    border: 1px solid black;
+    margin: 15px;
+}
+
+/* Style for paint Selector 1 (green) */
+#paint1 {
+    background-color: #edadc7;
+}
+
+#paint2 {
+    background-color: #00c2d1;
+}
+
+#paint3 {
+    background-color: #77E6AB;
+}
+
+#paint4 {
+    background-color: #f24236;
+}
+
+.onSelect {
+    border: 3px solid black;
+}
 /* ANIMATIONS */
 /* ----------------------------- */
 /* jump animation for player - add/remove class for jumping*/
