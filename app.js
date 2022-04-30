@@ -36,6 +36,80 @@ function createPlayer(){
     // add player to game area
     gameArea.append(player);
 }
+
+// PAINT SELECTORS 
+// -------------------------------------------------------
+// create array of paint colors to be used to referece selected paint - could change later
+const paintColorArray = ["#edadc7", "#00c2d1", "#77E6AB", "#f24236"];
+
+// grab paint selectors from DOM
+const paint1 = document.getElementById("paint1");
+const paint2 = document.getElementById("paint2");
+const paint3 = document.getElementById("paint3");
+const paint4 = document.getElementById("paint4");
+
+// create array of the DOM object to make it easier to add event Listeners
+const paintSelectors = [paint1, paint2, paint3, paint4];
+
+// for each paint selector
+paintSelectors.forEach((item) => {
+    // add a click event listener to add "onSelect" class when clicked
+    item.addEventListener("click", (e) => {
+        // check to see if button is already selected
+        if (!e.target.classList.contains("onSelect")){
+            // remove the onSelect Class from all paint Selectors
+            removeSelectors();
+            // add onSelect class to the selected paint color
+            e.target.classList.add("onSelect");
+            setBackgroundClick(e.target.id)
+        }
+    })
+})
+
+// event listener to listen for background color switching keystrokes
+window.addEventListener("keydown", (e) => {
+    // if user presses J, K, L, or ;
+    if (e.key === "j" || e.key === "k" || e.key === "l" || e.key === ";") {
+        // if background color switching keys are pressed run function to set the background color
+        setBackgroundKey(e.key);
+    }
+})
+
+// function to unhighlight all paint selectors (used before switching to new color)
+function removeSelectors(){
+    // remove the onSelect Class from all paint Selectors
+    paintSelectors.forEach((paint) => {
+        paint.classList.remove("onSelect")
+    })
+}
+
+// function for setting background color of game area after clikcing on the paint selector
+function setBackgroundClick(targetID){
+    // get paintColor from paint Color Array based on selected paint selector
+    let paintColor = paintColorArray[parseInt(targetID[targetID.length - 1]) - 1]
+    // set the background color of the game area to match selected color
+    gameArea.style.backgroundColor = paintColor;
+}
+
+// function to set the background when user presses J, K, L, ;
+function setBackgroundKey(key){
+    // if J is pressed set color to 1st color on pallet
+    if (key == "j"){
+        gameArea.style.backgroundColor = paintColorArray[0];
+    }
+    // if K is pressed set color to 2nd color on pallet
+    else if (key == "k"){
+        gameArea.style.backgroundColor = paintColorArray[1];
+    }
+    // if L is pressed set color to 3rd color on pallet
+    else if (key == "l"){
+        gameArea.style.backgroundColor = paintColorArray[2];
+    }
+    // if ; is pressed set color to 4th color on pallet
+    else if (key == ";"){
+        gameArea.style.backgroundColor = paintColorArray[3];
+    }
+}
 // PLAYER MOVEMENT
 // --------------------------------------------
 // add event listener to documnet to listen for move left/right
@@ -43,13 +117,11 @@ window.addEventListener("keydown", (e) => {
 
     // if user presses either the right arrow or the d key - move right
     if (e.key === "ArrowRight" || e.key == "d") {
-        console.log("right");
         playerDirection("right");
     }
 
     // if user presses either the left arrow or the a key - move left
     if (e.key === "ArrowLeft" || e.key == "a") {
-        console.log("left");
         playerDirection("left");
     }
 })
