@@ -1,7 +1,11 @@
+/* PAGE STYLING */
+/* ---------------------------------------- */
 h1 {
     text-align: center;
 }
 
+/* BASIC GAME ELEMENT STYLING */
+/* ---------------------------------------- */
 /* Game Area Style */
 #game {
     /* Set Basic Size of Game Area */
@@ -26,3 +30,35 @@ h1 {
     background-color: white;
     border: 3px solid black;
 }
+/* ANIMATIONS */
+/* ----------------------------- */
+/* jump animation for player - add/remove class for jumping*/
+.jump {
+    /* run jump animation for 0.4 seconds, linear movement (constant speed) */
+    animation: jump 0.4s linear;
+}
+
+@keyframes jump {
+    /* player starts 150 px from top (on ground) */
+    0% {
+      top: 150px;
+    }
+  
+    20% {
+      top: 110px;
+    }
+  
+    /* peak height 90 px off ground */
+    50% {
+      top: 60px;
+    }
+  
+    80% {
+      top: 110px;
+    }
+  
+    /* player ends back on the ground */
+    100% {
+      top: 150px;
+    }
+  }

@@ -36,7 +36,8 @@ document.addEventListener("keydown", (e) => {
 window.addEventListener("keydown", (e) => {
     // if user presses the spacebar, the arrow up or the w key - jump
     if (e.key === " " || e.key == "ArrowUp" || e.key == "w") {
-        console.log("jump");
+        // run player jump function - makes player jump
+        playerJump();
     }
 })
 
@@ -50,9 +51,24 @@ function playerDirection(direction){
     }
 
     // if the player chose to move right
-    if (direction == "right"){
+    else if (direction == "right"){
         // change player position to move to the right
         player.style.left = `${playerPos + moveBy}px`
     }
+}
+
+function playerJump(){
+    // check to see if player has jump class
+    if (player.classList.contains("jump")){
+        // don't let player jump if they are already airborne
+        return
+    }
+
+    // add the jump class - runs jump animation (takes 400ms to play)
+    player.classList.add("jump");
+    // after jump animation finishes remove the jump class
+    setTimeout(() => {
+        player.classList.remove("jump");
+    }, 400)
 }
 
