@@ -2,9 +2,27 @@ h1 {
     text-align: center;
 }
 
+/* Game Area Style */
 #game {
+    /* Set Basic Size of Game Area */
     width: 600px;
-    height: 200px;
+    height: 204px;
+    /* Center Game Area*/
     margin: auto;
+    /* Add Border */
     border: 1px solid black;
+}
+
+/* Style for Playable Character */
+#player {
+    /* Set Playable Character Size */
+    width: 50px;
+    height: 50px;
+
+    /* Set Positioning to Relative to Move Character around Game Area */
+    position: relative;
+    top: 150px;
+    /* Color for Testing - Replace with Img */
+    background-color: white;
+    border: 3px solid black;
 }
