@@ -3,21 +3,43 @@
 // Get Game Area
 const gameArea = document.getElementById("game");
 
-// Create Playable Character
-let player = document.createElement("div");
-// add id - player
-player.setAttribute("id", "player")
-// add player to game area
-gameArea.append(player);
-
 // Set characteristics
+// Game Area Size
+// width of the area is 600 px
+const gameWidth = 600;
+
+// Player Size
+// width of player is 50px
+const playerWidth = 50;
+
+// Movement Characteristics
 // how far the player will move with each keypress
 const moveBy = 30;
+// how long jump animation lasts (400ms)
+const jumpTime = 400;
 
+// CREATE GAME 
+// --------------------------------------------
+// run game on start - Replace later (testing)
+runGame();
+
+// function to run the game (run after hitting start)
+function runGame(){
+    createPlayer();
+}
+
+function createPlayer(){
+    // Create Playable Character
+    let player = document.createElement("div");
+    // add id - player
+    player.setAttribute("id", "player")
+    // add player to game area
+    gameArea.append(player);
+}
 // PLAYER MOVEMENT
 // --------------------------------------------
 // add event listener to documnet to listen for move left/right
-document.addEventListener("keydown", (e) => {
+window.addEventListener("keydown", (e) => {
 
     // if user presses either the right arrow or the d key - move right
     if (e.key === "ArrowRight" || e.key == "d") {
@@ -41,22 +63,24 @@ window.addEventListener("keydown", (e) => {
     }
 })
 
+// function to move player left or right
 function playerDirection(direction){
     // get current player position as integer
     let playerPos = parseInt(window.getComputedStyle(player).getPropertyValue("left"))
-    // if the player chose to move left
-    if (direction == "left"){
+    // if the player chose to move left & the player is within the gameboard
+    if (direction == "left" && playerPos > 0){
         // change player position to move to the left
         player.style.left = `${playerPos - moveBy}px`
     }
 
     // if the player chose to move right
-    else if (direction == "right"){
+    else if (direction == "right" && playerPos < (gameWidth-playerWidth-moveBy)){
         // change player position to move to the right
         player.style.left = `${playerPos + moveBy}px`
     }
 }
 
+// function to make player jump
 function playerJump(){
     // check to see if player has jump class
     if (player.classList.contains("jump")){
@@ -69,6 +93,6 @@ function playerJump(){
     // after jump animation finishes remove the jump class
     setTimeout(() => {
         player.classList.remove("jump");
-    }, 400)
+    }, jumpTime)
 }
 
