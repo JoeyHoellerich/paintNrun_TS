@@ -31,6 +31,33 @@ h1 {
     border: 3px solid black;
 }
 
+/* TILES */
+/* ----------------------------------------------- */
+/* container for tiles */
+#tiles {
+    display: grid;
+    width: 600px;
+    height: 55px;
+    border: 1px solid black;
+    margin: auto;
+}
+
+/* characteristics of all tiles */
+.tile {
+    grid-row: 1;
+    grid-column: 1;
+    position: relative;
+    /* Game Arena Width (starts at right end) */
+    left: 600px;
+    width: 50px;
+    height: 50px;
+}
+
+/* standard style */
+.tile0 {
+    border: 3px solid black;
+    border-right: none
+}
 /* PAINT SELECTOR */
 /* ----------------------------------------------- */
 /* Colors */
@@ -92,6 +119,10 @@ h1 {
     animation: jump 0.4s linear;
 }
 
+.moveTile {
+    animation: moveTile 2s linear;
+}
+
 @keyframes jump {
     /* player starts 150 px from top (on ground) */
     0% {
@@ -115,4 +146,13 @@ h1 {
     100% {
       top: 150px;
     }
-  }
+}
+
+@keyframes moveTile {
+    0% {
+        left: 600px;
+    }
+    100% {
+        left: -50px;
+    }
+}

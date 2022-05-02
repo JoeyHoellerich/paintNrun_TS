@@ -18,6 +18,20 @@ const moveBy = 30;
 // how long jump animation lasts (400ms)
 const jumpTime = 400;
 
+// Tile Characteristics
+// tile container 
+const tileContainer = document.getElementById("tiles");
+// width of tile
+const tileWidth = 50;
+// time it takes for a tile to move from right to left
+const tileMoveTime = 2000;
+// distance to the left of game area that tile will end (end of animation)
+const tileEndDistance = 50;
+// total distance tile will move per animation
+const tileMoveDistance = gameWidth + tileEndDistance
+// tile speed (in px/millisecond)
+const tileSpeed = tileMoveDistance/tileMoveTime;
+
 // CREATE GAME 
 // --------------------------------------------
 // run game on start - Replace later (testing)
@@ -198,3 +212,21 @@ function playerJump(){
     }, jumpTime)
 }
 
+// TILE GENERATION
+// functino that creates a new tile and adds it to line
+function createTile(){
+    // creates new tile div
+    let newTile = document.createElement("div");
+    // gives new tile the base class tile (basic characteristics of all tiles)
+    newTile.classList.add("tile");
+    // REPLACE! standard tile styles
+    newTile.classList.add("tile0");
+    // give new tile the class to move the tile from right to left
+    newTile.classList.add("moveTile");
+    // add tile to page 
+    tileContainer.append(newTile);
+}
+
+
+createTile();
+setTimeout(createTile, tileWidth/tileSpeed)
