@@ -95,24 +95,46 @@ function setBackgroundClick(targetID){
 function setBackgroundKey(key){
     // if J is pressed set color to 1st color on pallet
     if (key == "j"){
+        // if the paint is already selected, do nothing
+        if (paint1.classList.contains("onSelect")){
+            return
+        }
+        // remove any selected button
         removeSelectors()
+        // select the first paint button
         paint1.classList.add("onSelect")
+        // change background color to match selected paint
         gameArea.style.backgroundColor = paintColorArray[0];
     }
     // if K is pressed set color to 2nd color on pallet
     else if (key == "k"){
+        // if the paint is already selected, do nothing
+        if (paint2.classList.contains("onSelect")){
+            return
+        }
+        // remove any selected button
         removeSelectors()
         paint2.classList.add("onSelect")
         gameArea.style.backgroundColor = paintColorArray[1];
     }
     // if L is pressed set color to 3rd color on pallet
     else if (key == "l"){
+        // if the paint is already selected, do nothing
+        if (paint3.classList.contains("onSelect")){
+            return
+        }
+        // remove any selected button
         removeSelectors()
         paint3.classList.add("onSelect")
         gameArea.style.backgroundColor = paintColorArray[2];
     }
     // if ; is pressed set color to 4th color on pallet
     else if (key == ";"){
+        // if the paint is already selected, do nothing
+        if (paint4.classList.contains("onSelect")){
+            return
+        }
+        // remove any selected button
         removeSelectors()
         paint4.classList.add("onSelect")
         gameArea.style.backgroundColor = paintColorArray[3];
