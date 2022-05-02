@@ -52,6 +52,16 @@ h1 {
     height: 170px;
     border: 1px solid black;
     margin: 15px;
+    /* Center Text in Paint Selectors */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paint span {
+    font-family: sans-serif;
+    font-size: 2em;
+    font-weight: bold;
 }
 
 /* Style for paint Selector 1 (green) */
