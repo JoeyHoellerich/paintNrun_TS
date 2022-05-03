@@ -42,6 +42,7 @@ runGame();
 // function to run the game (run after hitting start)
 function runGame(){
     createPlayer();
+    setInterval(createTile, tileWidth/tileSpeed);
 }
 
 function createPlayer(){
@@ -105,6 +106,10 @@ function setBackgroundClick(targetID){
     let paintColor = paintColorArray[parseInt(targetID[targetID.length - 1]) - 1]
     // set the background color of the game area to match selected color
     gameArea.style.backgroundColor = paintColor;
+    // unfill any filled tiles
+    tileUnfiller()
+    // fill tiles to match background
+    tileFiller(paintColor);
 }
 
 // function to set the background when user presses J, K, L, ;
@@ -121,6 +126,10 @@ function setBackgroundKey(key){
         paint1.classList.add("onSelect")
         // change background color to match selected paint
         gameArea.style.backgroundColor = paintColorArray[0];
+        // unfill any filled tiles
+        tileUnfiller()
+        // fill tiles to match background
+        tileFiller(paintColorArray[0]);
     }
     // if K is pressed set color to 2nd color on pallet
     else if (key == "k"){
@@ -132,6 +141,10 @@ function setBackgroundKey(key){
         removeSelectors()
         paint2.classList.add("onSelect")
         gameArea.style.backgroundColor = paintColorArray[1];
+        // unfill any filled tiles
+        tileUnfiller()
+        // fill tiles to match background
+        tileFiller(paintColorArray[1]);
     }
     // if L is pressed set color to 3rd color on pallet
     else if (key == "l"){
@@ -143,6 +156,10 @@ function setBackgroundKey(key){
         removeSelectors()
         paint3.classList.add("onSelect")
         gameArea.style.backgroundColor = paintColorArray[2];
+        // unfill any filled tiles
+        tileUnfiller()
+        // fill tiles to match background
+        tileFiller(paintColorArray[2]);
     }
     // if ; is pressed set color to 4th color on pallet
     else if (key == ";"){
@@ -154,6 +171,8 @@ function setBackgroundKey(key){
         removeSelectors()
         paint4.classList.add("onSelect")
         gameArea.style.backgroundColor = paintColorArray[3];
+        // fill tiles to match background
+        tileFiller(paintColorArray[3]);
     }
 }
 // PLAYER MOVEMENT
@@ -324,5 +343,55 @@ function tileRemover(){
 // run the tile remover every 1 millisecond
 setInterval(tileRemover, 1);
 
+// fills/unfills tiles based on current selected color 
+// used when user changes the selected color
+function tileFiller(color){
+    // get array of all current tiles
+    let currentTiles = document.querySelectorAll(".tile");
+    // iterate through tiles on gameboard
+    currentTiles.forEach((tile) => {
+        // if it is a standard tile, do nothing
+        if (tile.classList.contains("tile0")){
+            return
+        }
+        // if the selected color is paint1
+        if (color == paintColorArray[0]){
+            // replace any unfilled tile1 with the filled version
+            tile.classList.replace("tile1-unfilled", "tile1-filled");
+        }
 
-setInterval(createTile, tileWidth/tileSpeed);
+        // if the selected color is paint2
+        if (color == paintColorArray[1]){
+            // replace any unfilled tile1 with the filled version
+            tile.classList.replace("tile2-unfilled", "tile2-filled");
+        }
+
+        // if the selected color is paint3
+        if (color == paintColorArray[2]){
+            // replace any unfilled tile1 with the filled version
+            tile.classList.replace("tile3-unfilled", "tile3-filled");
+        }
+
+        // if the selected color is paint4
+        if (color == paintColorArray[3]){
+            // replace any unfilled tile1 with the filled version
+            tile.classList.replace("tile4-unfilled", "tile4-filled");
+        }
+    })
+}
+
+// function that will unfill any filled tiles
+// used to remove filled tile when new color is selected
+function tileUnfiller() {
+    // get array of all current tiles in the game area
+    let currentTiles = document.querySelectorAll(".tile");
+
+    // iterate through current tiles
+    currentTiles.forEach((tile) => {
+        // replace filled tiles with unfilled
+        tile.classList.replace("tile1-filled", "tile1-unfilled");
+        tile.classList.replace("tile2-filled", "tile2-unfilled");
+        tile.classList.replace("tile3-filled", "tile3-unfilled");
+        tile.classList.replace("tile4-filled", "tile4-unfilled");
+    })
+}
