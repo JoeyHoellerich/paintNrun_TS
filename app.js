@@ -31,6 +31,8 @@ const tileEndDistance = 50;
 const tileMoveDistance = gameWidth + tileEndDistance
 // tile speed (in px/millisecond)
 const tileSpeed = tileMoveDistance/tileMoveTime;
+// tile switch speed (time it takes to switch the type of tile generated in milliseconds)
+const tileSwitchSpeed = 5000;
 
 // CREATE GAME 
 // --------------------------------------------
@@ -231,12 +233,21 @@ function createTile(){
     tileContainer.append(newTile);
 }
 
+// function to add the correct class to the generated tile 
+function addTileClass(tile){
+    
+}
+
 // changes the type of tile that is generated 
-function tileSelector(tile){
+function tileSwitcher(){
     // used to determine what type of tile will spawn next
     let value = Math.floor(Math.random() * paintColorArray.length);
-
+    // sets the currentTile variable to the random value
+    currentTile = tileTypes[value];
 }
+
+// switch the type of tile every x number of milliseconds
+setInterval(tileSwitcher, tileSwitchSpeed);
 
 // function that removes tiles that move past the edge of the Game Area
 function tileRemover(){

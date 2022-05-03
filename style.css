@@ -77,6 +77,39 @@ h1 {
     border: 3px dashed var(--paint1);
     background-color: white;
 }
+
+.tile2-filled {
+    border: 3px solid black;
+    border-right: none;
+    background-color: var(--paint2);
+}
+
+.tile2-unfilled {
+    border: 3px dashed var(--paint2);
+    background-color: white;
+}
+
+.tile3-filled {
+    border: 3px solid black;
+    border-right: none;
+    background-color: var(--paint3);
+}
+
+.tile3-unfilled {
+    border: 3px dashed var(--paint3);
+    background-color: white;
+}
+
+.tile4-filled {
+    border: 3px solid black;
+    border-right: none;
+    background-color: var(--paint4);
+}
+
+.tile4-unfilled {
+    border: 3px dashed var(--paint4);
+    background-color: white;
+}
 /* PAINT SELECTOR */
 /* ----------------------------------------------- */
 /* Colors */
