@@ -32,7 +32,7 @@ const tileMoveDistance = gameWidth + tileEndDistance
 // tile speed (in px/millisecond)
 const tileSpeed = tileMoveDistance/tileMoveTime;
 // tile switch speed (time it takes to switch the type of tile generated in milliseconds)
-const tileSwitchSpeed = 5000;
+const tileSwitchSpeed = 2000;
 
 // CREATE GAME 
 // --------------------------------------------
@@ -56,7 +56,7 @@ function createPlayer(){
 // PAINT SELECTORS 
 // -------------------------------------------------------
 // create array of paint colors to be used to referece selected paint - could change later
-const paintColorArray = ["#edadc7", "#00c2d1", "#77E6AB", "#f24236"];
+const paintColorArray = ["rgb(237, 173, 199)", "rgb(0, 194, 209)", "rgb(119, 230, 171)", "rgb(242, 66, 54)j"];
 
 // grab paint selectors from DOM
 const paint1 = document.getElementById("paint1");
@@ -226,7 +226,7 @@ function createTile(){
     // gives new tile the base class tile (basic characteristics of all tiles)
     newTile.classList.add("tile");
     // REPLACE! standard tile styles
-    newTile.classList.add("tile0");
+    addTileClass(newTile);
     // give new tile the class to move the tile from right to left
     newTile.classList.add("moveTile");
     // add tile to page 
@@ -235,7 +235,63 @@ function createTile(){
 
 // function to add the correct class to the generated tile 
 function addTileClass(tile){
-    
+    // checks current tile that is spawning
+    if (currentTile == "standard"){
+        // adds correct tile class
+        tile.classList.add("tile0")
+    }
+
+    // checks current tile spawning
+    else if(currentTile == "paint1"){
+        // checks to see if the background color matches spawining tile
+        if (gameArea.style.backgroundColor == paintColorArray[0]){
+            // adds filled class if match
+            tile.classList.add("tile1-filled")
+        }
+        else {
+            // adds unfilled class if no match
+            tile.classList.add("tile1-unfilled");
+        }
+    }
+
+    // checks current tile spawning
+    else if (currentTile == "paint2"){
+        // checks to see if the background color matches spawining tile
+        if (gameArea.style.backgroundColor == paintColorArray[1]){
+            // adds filled class if match
+            tile.classList.add("tile2-filled")
+        }
+        else {
+            // adds unfilled class if no match
+            tile.classList.add("tile2-unfilled");
+        }
+    }
+
+    // checks current tile spawning
+    else if (currentTile == "paint3"){
+        // checks to see if the background color matches spawining tile
+        if (gameArea.style.backgroundColor == paintColorArray[2]){
+            // adds filled class if match
+            tile.classList.add("tile3-filled")
+        }
+        else {
+            // adds unfilled class if no match
+            tile.classList.add("tile3-unfilled");
+        }
+    }
+
+    // checks current tile spawning
+    else if (currentTile == "paint4"){
+        // checks to see if the background color matches spawining tile
+        if (gameArea.style.backgroundColor == paintColorArray[3]){
+            // adds filled class if match
+            tile.classList.add("tile4-filled")
+        }
+        else {
+            // adds unfilled class if no match
+            tile.classList.add("tile4-unfilled");
+        }
+    }
 }
 
 // changes the type of tile that is generated 
