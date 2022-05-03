@@ -1,3 +1,11 @@
+/* COLORS */
+:root {
+    --paint1: #edadc7;
+    --paint2: #00c2d1;
+    --paint3: #77E6AB;
+    --paint4: #f24236;
+}
+
 /* PAGE STYLING */
 /* ---------------------------------------- */
 h1 {
@@ -56,7 +64,18 @@ h1 {
 /* standard style */
 .tile0 {
     border: 3px solid black;
-    border-right: none
+    background-color: rgb(74, 81, 87);
+}
+
+.tile1-filled {
+    border: 3px solid black;
+    border-right: none;
+    background-color: var(--paint1);
+}
+
+.tile1-unfilled {
+    border: 3px dashed var(--paint1);
+    background-color: white;
 }
 /* PAINT SELECTOR */
 /* ----------------------------------------------- */
@@ -93,19 +112,19 @@ h1 {
 
 /* Style for paint Selector 1 (green) */
 #paint1 {
-    background-color: #edadc7;
+    background-color: var(--paint1);
 }
 
 #paint2 {
-    background-color: #00c2d1;
+    background-color: var(--paint2);
 }
 
 #paint3 {
-    background-color: #77E6AB;
+    background-color: var(--paint3);
 }
 
 #paint4 {
-    background-color: #f24236;
+    background-color: var(--paint4);
 }
 
 .onSelect {

@@ -22,7 +22,7 @@ const jumpTime = 400;
 // tile container 
 const tileContainer = document.getElementById("tiles");
 // width of tile
-const tileWidth = 50;
+const tileWidth = 50+3;
 // time it takes for a tile to move from right to left
 const tileMoveTime = 2000;
 // distance to the left of game area that tile will end (end of animation)
@@ -213,7 +213,11 @@ function playerJump(){
 }
 
 // TILE GENERATION
-// functino that creates a new tile and adds it to line
+// array of potential tile types
+const tileTypes = ["standard", "paint1", "paint2", "paint3", "paint4"];
+// set's defualt tile type to "standard"
+let currentTile = "standard";
+// generates new tile that will move across game area
 function createTile(){
     // creates new tile div
     let newTile = document.createElement("div");
@@ -227,6 +231,31 @@ function createTile(){
     tileContainer.append(newTile);
 }
 
+// changes the type of tile that is generated 
+function tileSelector(tile){
+    // used to determine what type of tile will spawn next
+    let value = Math.floor(Math.random() * paintColorArray.length);
 
-createTile();
-setTimeout(createTile, tileWidth/tileSpeed)
+}
+
+// function that removes tiles that move past the edge of the Game Area
+function tileRemover(){
+    // get all the current tiles in the game area
+    let currentTiles = document.querySelectorAll(".tile");
+    // iterate through current tiles
+    currentTiles.forEach((tile) => {
+        // get the distance each tile is from the left side of the game area
+        let distance = parseInt(window.getComputedStyle(tile).getPropertyValue("left"));
+        // if the tile is past the edge of the game area
+        if (distance < -(tileEndDistance) + 5){
+            // remove the game tile from the page
+            tile.remove();
+        }
+    })
+}
+
+// run the tile remover every 1 millisecond
+setInterval(tileRemover, 1);
+
+
+setInterval(createTile, tileWidth/tileSpeed);
