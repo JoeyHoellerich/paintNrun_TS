@@ -39,6 +39,15 @@ h1 {
     border: 3px solid black;
 }
 
+#retry {
+    position: relative;
+    width: 250px;
+    height: 100px;
+    left: 175px;
+    top: 50px;
+    border: 1px solid black;
+}
+
 /* TILES */
 /* ----------------------------------------------- */
 /* container for tiles */

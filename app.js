@@ -13,6 +13,8 @@ const gameWidth = 600;
 const playerWidth = 50;
 // player top postion while grounded
 const playerTopGrounded = 150;
+// is the player alive - default is true
+let isAlive = true;
 
 // Movement Characteristics
 // how far the player will move with each keypress
@@ -35,6 +37,12 @@ const tileMoveDistance = gameWidth + tileEndDistance
 const tileSpeed = tileMoveDistance/tileMoveTime;
 // tile switch speed (time it takes to switch the type of tile generated in milliseconds)
 const tileSwitchSpeed = 2000;
+// holds the tile generator setInterval 
+var tileGenerator;
+var tileCollisionChecker;
+
+// Retry Button
+const retryButtonWidth = 300;
 
 // CREATE GAME 
 // --------------------------------------------
@@ -44,9 +52,9 @@ runGame();
 // function to run the game (run after hitting start)
 function runGame(){
     createPlayer();
-    setInterval(createTile, tileWidth/tileSpeed);
+    tileGenerator = setInterval(createTile, tileWidth/tileSpeed);
     // check to see if user is colliding with tile every 1 millisecond
-    setInterval(tileCollisionCheck, 1);
+    tileCollisionChecker = setInterval(tileCollisionCheck, 1);
 }
 
 function createPlayer(){
@@ -185,22 +193,30 @@ function setBackgroundKey(key){
 // --------------------------------------------
 // add event listener to documnet to listen for move left/right
 window.addEventListener("keydown", (e) => {
+    // don't let player move if they aren't alive
+    if (!isAlive){
+        return
+    }
 
     // if user presses either the right arrow or the d key - move right
-    if (e.key === "ArrowRight" || e.key == "d") {
+    else if (e.key === "ArrowRight" || e.key == "d") {
         playerDirection("right");
     }
 
     // if user presses either the left arrow or the a key - move left
-    if (e.key === "ArrowLeft" || e.key == "a") {
+    else if (e.key === "ArrowLeft" || e.key == "a") {
         playerDirection("left");
     }
 })
 
 // separate event listener to listen for jumps
 window.addEventListener("keydown", (e) => {
+    // don't let player jump is they aren't alive
+    if (!isAlive){
+        return
+    }
     // if user presses the spacebar, the arrow up or the w key - jump
-    if (e.key === " " || e.key == "ArrowUp" || e.key == "w") {
+    else if (e.key === " " || e.key == "ArrowUp" || e.key == "w") {
         // run player jump function - makes player jump
         playerJump();
     }
@@ -420,8 +436,55 @@ function tileCollisionCheck(){
 
         // check to see if the player's position is over unfilled tile hitbox
         if (playerPosMid > tileHitboxLeft && playerPosMid < tileHitboxRight){
-            console.log("dead man walking")
+            deathScreen();
         }
     })
-
 }
+
+// DEATH SCREEN AND RESPAWN
+
+function deathScreen() {
+    // player is no longer alive (this stops tile generation and collision checks)
+    isAlive = false;
+    // remove all tiles
+    document.querySelectorAll(".tile").forEach(item => item.remove());
+    // stop generating tiles
+    clearInterval(tileGenerator);
+    // stop checking for collisions
+    clearInterval(tileCollisionChecker);
+    // grab player object from DOM
+    let player = document.getElementById("player");
+    // remove the player
+    player.remove();
+
+    // create a retry button
+    let retryButton = document.createElement("button");
+    retryButton.style.position = "relative";
+    retryButton.setAttribute("id", "retry");
+    retryButton.setAttribute("type", "button");
+    retryButton.innerHTML = `<b>Try Again?</b><br><p>(Press Enter)</p>`
+    // append it to gameboard
+    gameArea.append(retryButton);
+}
+
+// function to allow player to respawn if they are dead
+function respawn() {
+    // grab retry button from DOM
+    let retryButton = document.getElementById("retry");
+    // remove it
+    retryButton.remove();
+
+    // player is now alive again
+    isAlive = true;
+    // start a new game
+    runGame()
+}
+
+// event Listener to respawn when player is dead
+window.addEventListener("keydown", (e) => {
+    // checks to see if player is dead, and if user has pressed enter key
+    if (e.key == "Enter" && !isAlive){
+        // respawn player (start new game)
+        respawn()
+    }
+})
