@@ -26,7 +26,7 @@ const tileWidth = 50+3;
 // time it takes for a tile to move from right to left
 const tileMoveTime = 2000;
 // distance to the left of game area that tile will end (end of animation)
-const tileEndDistance = 50;
+const tileEndDistance = 60;
 // total distance tile will move per animation
 const tileMoveDistance = gameWidth + tileEndDistance
 // tile speed (in px/millisecond)
@@ -57,7 +57,7 @@ function createPlayer(){
 // PAINT SELECTORS 
 // -------------------------------------------------------
 // create array of paint colors to be used to referece selected paint - could change later
-const paintColorArray = ["rgb(237, 173, 199)", "rgb(0, 194, 209)", "rgb(119, 230, 171)", "rgb(242, 66, 54)j"];
+const paintColorArray = ["rgb(237, 173, 199)", "rgb(0, 194, 209)", "rgb(119, 230, 171)", "rgb(242, 66, 54)"];
 
 // grab paint selectors from DOM
 const paint1 = document.getElementById("paint1");
@@ -171,6 +171,8 @@ function setBackgroundKey(key){
         removeSelectors()
         paint4.classList.add("onSelect")
         gameArea.style.backgroundColor = paintColorArray[3];
+        // unfill any filled tiles
+        tileUnfiller()
         // fill tiles to match background
         tileFiller(paintColorArray[3]);
     }
@@ -250,6 +252,13 @@ function createTile(){
     newTile.classList.add("moveTile");
     // add tile to page 
     tileContainer.append(newTile);
+    // remove tile after it moves across the page
+    setTimeout(() => {
+        // grab the oldest tile (the one that has moved the farthest)
+        let addedTile = document.getElementById("tiles").firstChild
+        // remove the tile after the "tileMoveTime" - Time it takes for tile to travel across game area
+        addedTile.remove()
+    }, tileMoveTime)
 }
 
 // function to add the correct class to the generated tile 
@@ -316,32 +325,13 @@ function addTileClass(tile){
 // changes the type of tile that is generated 
 function tileSwitcher(){
     // used to determine what type of tile will spawn next
-    let value = Math.floor(Math.random() * paintColorArray.length);
+    let value = Math.floor(Math.random() * tileTypes.length);
     // sets the currentTile variable to the random value
     currentTile = tileTypes[value];
 }
 
 // switch the type of tile every x number of milliseconds
 setInterval(tileSwitcher, tileSwitchSpeed);
-
-// function that removes tiles that move past the edge of the Game Area
-function tileRemover(){
-    // get all the current tiles in the game area
-    let currentTiles = document.querySelectorAll(".tile");
-    // iterate through current tiles
-    currentTiles.forEach((tile) => {
-        // get the distance each tile is from the left side of the game area
-        let distance = parseInt(window.getComputedStyle(tile).getPropertyValue("left"));
-        // if the tile is past the edge of the game area
-        if (distance < -(tileEndDistance) + 5){
-            // remove the game tile from the page
-            tile.remove();
-        }
-    })
-}
-
-// run the tile remover every 1 millisecond
-setInterval(tileRemover, 1);
 
 // fills/unfills tiles based on current selected color 
 // used when user changes the selected color
