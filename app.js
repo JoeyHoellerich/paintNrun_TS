@@ -11,6 +11,8 @@ const gameWidth = 600;
 // Player Size
 // width of player is 50px
 const playerWidth = 50;
+// player top postion while grounded
+const playerTopGrounded = 150;
 
 // Movement Characteristics
 // how far the player will move with each keypress
@@ -21,7 +23,7 @@ const jumpTime = 400;
 // Tile Characteristics
 // tile container 
 const tileContainer = document.getElementById("tiles");
-// width of tile
+// width of tile (+ border)
 const tileWidth = 50+3;
 // time it takes for a tile to move from right to left
 const tileMoveTime = 2000;
@@ -43,6 +45,8 @@ runGame();
 function runGame(){
     createPlayer();
     setInterval(createTile, tileWidth/tileSpeed);
+    // check to see if user is colliding with tile every 1 millisecond
+    setInterval(tileCollisionCheck, 1);
 }
 
 function createPlayer(){
@@ -384,4 +388,40 @@ function tileUnfiller() {
         tile.classList.replace("tile3-filled", "tile3-unfilled");
         tile.classList.replace("tile4-filled", "tile4-unfilled");
     })
+}
+
+// COLLISION CHECKS
+// User and Unfilled Tile Check
+// function that checks if the user is colliding with any unfilled tiles
+function tileCollisionCheck(){
+    // Get User's Position
+    // user's position from the left 
+    let playerPosLeft = parseInt(window.getComputedStyle(player).getPropertyValue("left"))
+    // player midPoint - used to check for collisions
+    let playerPosMid = playerPosLeft + (playerWidth/2)
+    // user's position from the top (is the player in the air?)
+    let playerPosTop = parseInt(window.getComputedStyle(player).getPropertyValue("top"))
+
+    // if the player is in the jump animation, leave the function
+    // player cannot collide with tile while jumping
+    if (playerPosTop < playerTopGrounded){
+        return
+    }
+
+    // Get Tiles
+    // gets collection of all current unfilled tiles (tiles with dashed lines)
+    let currentUnfilledTiles = document.querySelectorAll(".tile1-unfilled, .tile2-unfilled, .tile3-unfilled, .tile4-unfilled");
+    // check each tile's position vs. player position
+    currentUnfilledTiles.forEach((tile) => {
+        // start of the hitbox (on the left side)
+        let tileHitboxLeft = parseInt(window.getComputedStyle(tile).getPropertyValue("left"));
+        // end of hitbox (on the right side)
+        let tileHitboxRight = tileHitboxLeft + tileWidth
+
+        // check to see if the player's position is over unfilled tile hitbox
+        if (playerPosMid > tileHitboxLeft && playerPosMid < tileHitboxRight){
+            console.log("dead man walking")
+        }
+    })
+
 }

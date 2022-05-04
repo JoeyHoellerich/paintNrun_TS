@@ -2,7 +2,8 @@
 
 What is Paint 'N Run?
 
-How to Play
+- Paint
+
+How to Play:
 
 How to Win?
-
