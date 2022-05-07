@@ -22,6 +22,10 @@ const moveBy = 30;
 // how long jump animation lasts (400ms)
 const jumpTime = 400;
 
+// Score
+// player's score (distance traveled since start)
+let score = 0; 
+
 // Tile Characteristics
 // tile container (global to access from functions)
 let tileContainer;
@@ -30,17 +34,31 @@ const tileWidth = 50+3;
 // time it takes for a tile to move from right to left
 const tileMoveTime = 2000;
 // distance to the left of game area that tile will end (end of animation)
-const tileEndDistance = 60;
+const tileEndDistance = 80;
 // total distance tile will move per animation
 const tileMoveDistance = gameWidth + tileEndDistance
 // tile speed (in px/millisecond)
 const tileSpeed = tileMoveDistance/tileMoveTime;
 // tile switch speed (time it takes to switch the type of tile generated in milliseconds)
 const tileSwitchSpeed = 2000;
+// max tiles that can be on the board
+const maxTileAmt = Math.round(tileMoveDistance/tileWidth)
+
 // holds the tile generator setInterval 
 var tileGenerator;
+// holds tile remover setInterval
 var tileRemover; 
+// holds tile switcher setInterval
+var tileSwitcher;
+// holds tile collision checker setInterval
 var tileCollisionChecker;
+
+// array of potential tile types
+const tileTypes = ["standard", "paint1", "paint2", "paint3", "paint4"];
+// set's defualt tile type to "standard"
+let currentTile = "standard";
+
+
 
 // Retry Button
 const retryButtonWidth = 300;
@@ -52,6 +70,8 @@ runGame();
 
 // function to run the game (run after hitting start)
 function runGame(){
+    // reset score
+    score = 0;
     // creates new player element
     createPlayer();
     // creates box to hold tiles
@@ -59,7 +79,11 @@ function runGame(){
     // generates tiles while game is running
     tileGenerator = setInterval(createTile, tileWidth/tileSpeed);
     // removes tiles as they move beyond the screen
-    tileRemover = setInterval(removeTile, tileMoveTime);
+    tileRemover = setInterval(removeTile, tileWidth/tileSpeed);
+    // set the starting tiles to "standard" when game restarts
+    currentTile = "standard"
+    // switch the type of tile every x number of milliseconds
+    tileSwitcher = setInterval(changeTile, tileSwitchSpeed);
     // check to see if user is colliding with tile every 1 millisecond
     tileCollisionChecker = setInterval(tileCollisionCheck, 1);
 }
@@ -270,10 +294,6 @@ function playerJump(){
 }
 
 // TILE GENERATION
-// array of potential tile types
-const tileTypes = ["standard", "paint1", "paint2", "paint3", "paint4"];
-// set's defualt tile type to "standard"
-let currentTile = "standard";
 // generates new tile that will move across game area
 function createTile(){
     // creates new tile div
@@ -286,17 +306,21 @@ function createTile(){
     newTile.classList.add("moveTile");
     // add tile to page 
     tileContainer.append(newTile);
+    scoreUpdate();
 }
 
 // removes tile after it moves across the board
 function removeTile(){
     // get the oldest tile from the collection of tiles
-    let addedTile = document.getElementById("tiles").firstChild
-    // makes sure there is a tile available to remove
-    if (addedTile != null){
-        // remove the tile after the "tileMoveTime" - Time it takes for tile to travel across game area
-        addedTile.remove()  
+    if (score > maxTileAmt ){
+        let addedTile = document.getElementById("tiles").firstChild
+        addedTile.remove()
     }
+    // // makes sure there is a tile available to remove
+    // if (addedTile != null){
+    //     // remove the tile after the "tileMoveTime" - Time it takes for tile to travel across game area
+    //     addedTile.remove()  
+    // }
 }
 
 // function to add the correct class to the generated tile 
@@ -361,15 +385,12 @@ function addTileClass(tile){
 }
 
 // changes the type of tile that is generated 
-function tileSwitcher(){
+function changeTile(){
     // used to determine what type of tile will spawn next
     let value = Math.floor(Math.random() * tileTypes.length);
     // sets the currentTile variable to the random value
     currentTile = tileTypes[value];
 }
-
-// switch the type of tile every x number of milliseconds
-setInterval(tileSwitcher, tileSwitchSpeed);
 
 // fills/unfills tiles based on current selected color 
 // used when user changes the selected color
@@ -459,6 +480,12 @@ function tileCollisionCheck(){
     })
 }
 
+// SCORING 
+function scoreUpdate(){
+    score += 1;
+    console.log(score);
+}
+
 // DEATH SCREEN AND RESPAWN
 
 function deathScreen() {
@@ -470,6 +497,8 @@ function deathScreen() {
     clearInterval(tileGenerator);
     // stop removing tiles (they don't exist anymore)
     clearInterval(tileRemover);
+    // stop switching tiles
+    clearInterval(tileSwitcher);
     // stop checking for collisions
     clearInterval(tileCollisionChecker);
     // grab player object from DOM
