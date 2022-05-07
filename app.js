@@ -24,9 +24,18 @@ const jumpTime = 400;
 
 // Score
 // player's score (distance traveled since start)
-let score = 0; 
+let score = 0;
 // score displayed on page
 const scoreNum = document.getElementById("scoreNum");
+// user's high score
+let userHighScore;
+// get previous high score from local storage (if available)
+if (localStorage.highScore){
+    userHighScore = localStorage.highScore;
+}
+else{
+    userHighScore = 0;
+}
 
 // Tile Characteristics
 // tile container (global to access from functions)
@@ -313,7 +322,7 @@ function createTile(){
 // removes tile after it moves across the board
 function removeTile(){
     // only remove tiles if there is greater than the max acceptable number in the game area
-    if (score > maxTileAmt ){
+    if (score > maxTileAmt){
         // get the oldest tile from the collection of tiles and remove it
         let addedTile = document.getElementById("tiles").firstChild
         addedTile.remove()
@@ -506,12 +515,18 @@ function deathScreen() {
     // remove the player
     player.remove();
 
+    // High Score Calcs
+    if (score > userHighScore){
+        userHighScore = score;
+        localStorage.setItem("highScore", userHighScore);
+    }
+
     // create a retry button
     let retryButton = document.createElement("button");
     retryButton.style.position = "relative";
     retryButton.setAttribute("id", "retry");
     retryButton.setAttribute("type", "button");
-    retryButton.innerHTML = `<b>Try Again?</b><br><p>(Press Enter)</p>`
+    retryButton.innerHTML = `<b>Try Again?</b><br><p>(Press Enter)</p><i>High Score: ${userHighScore}</i>`
     // append it to gameboard
     gameArea.append(retryButton);
 }
