@@ -70,13 +70,20 @@ const tileTypes = ["standard", "paint1", "paint2", "paint3", "paint4"];
 // set's defualt tile type to "standard"
 let currentTile = "standard";
 
+// Start button
+const startBtn = document.getElementById("start");
+
 // Retry Button
 const retryButtonWidth = 300;
 
 // CREATE GAME 
 // --------------------------------------------
+// Start
+startBtn.addEventListener("click", (e) => {
+    e.target.remove();
+    runGame()
+});
 // run game on start - Replace later (testing)
-runGame();
 
 // function to run the game (run after hitting start)
 function runGame(){
