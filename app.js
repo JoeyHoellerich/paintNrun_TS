@@ -12,7 +12,7 @@ const gameWidth = 600;
 // width of player is 50px
 const playerWidth = 50;
 // player top postion while grounded
-const playerTopGrounded = 150;
+const playerTopGrounded = 110;
 // is the player alive - default is true
 let isAlive = true;
 
