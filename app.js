@@ -76,6 +76,8 @@ const obstacleWidth = 20;
 const obstacleSpawnChance = 3;
 // holds obstacleSpawner setInterval
 var obstacleSpawner;
+// holds obstacle collision checker setInterval 
+var obstacleCollisionChecker;
 
 // Paint Colors for Tiles
 // array of potential tile types
@@ -134,9 +136,11 @@ function runGame(){
 
     // checks to see if it should spawn a new obstacle (minimum spawn time is after previous obstacle has moved across game area)
     obstacleSpawner = setInterval(shouldSpawnObstacle, obstacleMoveTime);
-    
+
     // check to see if user is colliding with tile every 1 millisecond
     tileCollisionChecker = setInterval(tileCollisionCheck, 1);
+    // check to see if user is colliding with the obstacle every 1 millisecond
+    obstacleCollisionCheck = setInterval(obstacleCollisionCheck, 1)
 }
 
 function createPlayer(){
@@ -544,13 +548,34 @@ function tileCollisionCheck(){
         // start of the hitbox (on the left side)
         let tileHitboxLeft = parseInt(window.getComputedStyle(tile).getPropertyValue("left"));
         // end of hitbox (on the right side)
-        let tileHitboxRight = tileHitboxLeft + tileWidth
+        let tileHitboxRight = tileHitboxLeft + tileWidth;
 
         // check to see if the player's position is over unfilled tile hitbox
         if (playerPosMid > tileHitboxLeft && playerPosMid < tileHitboxRight){
             deathScreen();
         }
     })
+}
+
+function obstacleCollisionCheck() {
+    // only check collisions if the obstacle is moving and visible
+    if (obstacle.classList.contains("obstacleMove")){
+        // get player positions (int)
+        let playerPosLeft = parseInt(window.getComputedStyle(player).getPropertyValue("left"));
+        // used to check horizontal collision (only checked at midpoint of player)
+        let playerPosMid = playerPosLeft + (playerWidth/2)
+        // used to see if player clears the obstacle
+        let playerPosTop = parseInt(window.getComputedStyle(player).getPropertyValue("top"))
+
+        // define obstacle hitbox
+        let obstacleHitboxLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue("left"));
+        let obstacleHitboxRight = obstacleHitboxLeft + obstacleWidth;
+
+        // if the player is over the obstacle and their vertical height is smaller than the height of the obstacle
+        if ((playerPosMid > obstacleHitboxLeft && playerPosMid < obstacleHitboxRight) && playerPosTop > (playerTopGrounded - obstacleHeight)){
+            deathScreen();
+        }
+    }
 }
 
 // SCORING 
@@ -575,8 +600,11 @@ function deathScreen() {
     clearInterval(tileRemover);
     // stop switching tiles
     clearInterval(tileSwitcher);
+    // stop spawning obstacles 
+    clearInterval(obstacleSpawner);
     // stop checking for collisions
     clearInterval(tileCollisionChecker);
+    clearInterval(obstacleCollisionChecker);
     // grab player object from DOM
     let player = document.getElementById("player");
     // remove the player
