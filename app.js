@@ -25,6 +25,8 @@ const jumpTime = 400;
 // Score
 // player's score (distance traveled since start)
 let score = 0; 
+// score displayed on page
+const scoreNum = document.getElementById("scoreNum");
 
 // Tile Characteristics
 // tile container (global to access from functions)
@@ -481,6 +483,7 @@ function tileCollisionCheck(){
 function scoreUpdate(){
     score += 1;
     console.log(score);
+    scoreNum.innerHTML = score;
 }
 
 // DEATH SCREEN AND RESPAWN
