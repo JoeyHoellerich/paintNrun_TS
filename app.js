@@ -64,6 +64,19 @@ var tileSwitcher;
 // holds tile collision checker setInterval
 var tileCollisionChecker;
 
+// Obstacles
+const obstacle = document.querySelector(".obstacle");
+// time it takes for obstacle to move across the screen
+const obstacleMoveTime = 1500;
+// obstacle height
+const obstacleHeight = 40;
+// obstacle width
+const obstacleWidth = 20;
+// chance to spawn obstacle (#/10)
+const obstacleSpawnChance = 3;
+// holds obstacleSpawner setInterval
+var obstacleSpawner;
+
 // Paint Colors for Tiles
 // array of potential tile types
 const tileTypes = ["standard", "paint1", "paint2", "paint3", "paint4"];
@@ -108,6 +121,8 @@ function runGame(){
     createPlayer();
     // creates box to hold tiles
     createTileContainer();
+
+
     // generates tiles while game is running
     tileGenerator = setInterval(createTile, tileWidth/tileSpeed);
     // removes tiles as they move beyond the screen
@@ -116,6 +131,10 @@ function runGame(){
     currentTile = "standard"
     // switch the type of tile every x number of milliseconds
     tileSwitcher = setInterval(changeTile, tileSwitchSpeed);
+
+    // checks to see if it should spawn a new obstacle (minimum spawn time is after previous obstacle has moved across game area)
+    obstacleSpawner = setInterval(shouldSpawnObstacle, obstacleMoveTime);
+    
     // check to see if user is colliding with tile every 1 millisecond
     tileCollisionChecker = setInterval(tileCollisionCheck, 1);
 }
@@ -471,6 +490,32 @@ function tileUnfiller() {
         tile.classList.replace("tile3-filled", "tile3-unfilled");
         tile.classList.replace("tile4-filled", "tile4-unfilled");
     })
+}
+
+// OBSTACLES AND ENEMIES
+// makes obstacle visible for player to jump over
+function spawnObstacle(){
+    // checks to see if class is already added
+    if (!obstacle.classList.contains("obstacleMove")){
+        // adds the correct class (makes obstacle appear and move)
+        obstacle.classList.add("obstacleMove");
+        // after the obstacle moves across the screen, make it invisible again
+        setTimeout(() => {
+            obstacle.classList.remove("obstacleMove")
+        }, obstacleMoveTime)
+    }
+}
+
+function shouldSpawnObstacle(){
+    // makes sure that all tiles have filled the game area
+    if (score > maxTileAmt){
+        // gets random value between 1-10
+        let value = Math.floor(Math.random() * 10) + 1;
+        // if the random value is above 7, spawn an obstacle (30% of time)
+        if (value <= obstacleSpawnChance){
+            spawnObstacle();
+        }
+    }
 }
 
 // COLLISION CHECKS

@@ -239,7 +239,7 @@ body {
 .obstacleMove {
     background-color: rgb(245, 208, 47);
     border: 1px solid black;  
-    animation: obstacleMove 1.5s infinite linear; 
+    animation: obstacleMove 1.5s linear; 
 }
 
 @keyframes jump {
