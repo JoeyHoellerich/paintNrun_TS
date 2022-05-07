@@ -23,8 +23,8 @@ const moveBy = 30;
 const jumpTime = 400;
 
 // Tile Characteristics
-// tile container 
-const tileContainer = document.getElementById("tiles");
+// tile container (global to access from functions)
+let tileContainer;
 // width of tile (+ border)
 const tileWidth = 50+3;
 // time it takes for a tile to move from right to left
@@ -39,6 +39,7 @@ const tileSpeed = tileMoveDistance/tileMoveTime;
 const tileSwitchSpeed = 2000;
 // holds the tile generator setInterval 
 var tileGenerator;
+var tileRemover; 
 var tileCollisionChecker;
 
 // Retry Button
@@ -51,8 +52,14 @@ runGame();
 
 // function to run the game (run after hitting start)
 function runGame(){
+    // creates new player element
     createPlayer();
+    // creates box to hold tiles
+    createTileContainer();
+    // generates tiles while game is running
     tileGenerator = setInterval(createTile, tileWidth/tileSpeed);
+    // removes tiles as they move beyond the screen
+    tileRemover = setInterval(removeTile, tileMoveTime);
     // check to see if user is colliding with tile every 1 millisecond
     tileCollisionChecker = setInterval(tileCollisionCheck, 1);
 }
@@ -64,6 +71,13 @@ function createPlayer(){
     player.setAttribute("id", "player")
     // add player to game area
     gameArea.append(player);
+}
+
+function createTileContainer() {
+    tileContainer = document.createElement("div");
+    tileContainer.setAttribute("id", "tiles");
+    let refereceNode = document.getElementById("paintContainer");
+    document.body.insertBefore(tileContainer, refereceNode);
 }
 
 // PAINT SELECTORS 
@@ -272,13 +286,17 @@ function createTile(){
     newTile.classList.add("moveTile");
     // add tile to page 
     tileContainer.append(newTile);
-    // remove tile after it moves across the page
-    setTimeout(() => {
-        // grab the oldest tile (the one that has moved the farthest)
-        let addedTile = document.getElementById("tiles").firstChild
+}
+
+// removes tile after it moves across the board
+function removeTile(){
+    // get the oldest tile from the collection of tiles
+    let addedTile = document.getElementById("tiles").firstChild
+    // makes sure there is a tile available to remove
+    if (addedTile != null){
         // remove the tile after the "tileMoveTime" - Time it takes for tile to travel across game area
-        addedTile.remove()
-    }, tileMoveTime)
+        addedTile.remove()  
+    }
 }
 
 // function to add the correct class to the generated tile 
@@ -447,9 +465,11 @@ function deathScreen() {
     // player is no longer alive (this stops tile generation and collision checks)
     isAlive = false;
     // remove all tiles
-    document.querySelectorAll(".tile").forEach(item => item.remove());
+    tileContainer.remove();
     // stop generating tiles
     clearInterval(tileGenerator);
+    // stop removing tiles (they don't exist anymore)
+    clearInterval(tileRemover);
     // stop checking for collisions
     clearInterval(tileCollisionChecker);
     // grab player object from DOM
