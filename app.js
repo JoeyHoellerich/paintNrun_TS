@@ -79,11 +79,26 @@ const retryButtonWidth = 300;
 // CREATE GAME 
 // --------------------------------------------
 // Start
+// changes start button background color every second (aesthetics)
+let startBorder = setInterval(startBtnBorderSwitch, 1000);
+
+// start game when start button is clicked
 startBtn.addEventListener("click", (e) => {
+    //remove the start button
     e.target.remove();
+    // stop calling the start button switching function
+    clearInterval(startBorder);
+    // run the actual game
     runGame()
 });
-// run game on start - Replace later (testing)
+
+// change border styling for start button
+function startBtnBorderSwitch(){
+    if (startBtn != null){
+        let value = Math.floor(Math.random() * paintColorArray.length)
+        startBtn.style.backgroundColor = paintColorArray[value];
+    }
+}
 
 // function to run the game (run after hitting start)
 function runGame(){
