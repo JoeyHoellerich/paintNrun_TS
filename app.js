@@ -7,6 +7,7 @@ const gameArea = document.getElementById("game");
 // Game Area Size
 // width of the area is 600 px
 const gameWidth = 600;
+const defaultColor = "rgb(190, 190, 190)"
 
 // Player Size
 // width of player is 50px
@@ -80,6 +81,8 @@ var obstacleSpawner;
 var obstacleCollisionChecker;
 
 // Paint Colors for Tiles
+// create array of paint colors to be used to referece selected paint - could change later
+const paintColorArray = ["rgb(255, 58, 137)", "rgb(0, 194, 209)", "rgb(119, 230, 171)", "rgb(240, 208, 27)"];
 // array of potential tile types
 const tileTypes = ["standard", "paint1", "paint2", "paint3", "paint4"];
 // set's defualt tile type to "standard"
@@ -94,6 +97,8 @@ const retryButtonWidth = 300;
 // CREATE GAME 
 // --------------------------------------------
 // Start
+// set default background color 
+gameArea.style.backgroundColor = defaultColor;
 // changes start button background color every second (aesthetics)
 let startBorder = setInterval(startBtnBorderSwitch, 1000);
 
@@ -117,6 +122,8 @@ function startBtnBorderSwitch(){
 
 // function to run the game (run after hitting start)
 function runGame(){
+    //set default game area to grey
+    gameArea.style.backgroundColor = defaultColor;
     // reset score
     score = 0;
     // creates new player element
@@ -161,9 +168,6 @@ function createTileContainer() {
 
 // PAINT SELECTORS 
 // -------------------------------------------------------
-// create array of paint colors to be used to referece selected paint - could change later
-const paintColorArray = ["rgb(237, 173, 199)", "rgb(0, 194, 209)", "rgb(119, 230, 171)", "rgb(242, 66, 54)"];
-
 // grab paint selectors from DOM
 const paint1 = document.getElementById("paint1");
 const paint2 = document.getElementById("paint2");
@@ -583,7 +587,6 @@ function obstacleCollisionCheck() {
 // function to update the score in the game (+1 for every tile generated)
 function scoreUpdate(){
     score += 1;
-    console.log(score);
     scoreNum.innerHTML = score;
 }
 
