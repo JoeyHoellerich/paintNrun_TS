@@ -53,12 +53,11 @@ var tileSwitcher;
 // holds tile collision checker setInterval
 var tileCollisionChecker;
 
+// Paint Colors for Tiles
 // array of potential tile types
 const tileTypes = ["standard", "paint1", "paint2", "paint3", "paint4"];
 // set's defualt tile type to "standard"
 let currentTile = "standard";
-
-
 
 // Retry Button
 const retryButtonWidth = 300;
@@ -311,16 +310,12 @@ function createTile(){
 
 // removes tile after it moves across the board
 function removeTile(){
-    // get the oldest tile from the collection of tiles
+    // only remove tiles if there is greater than the max acceptable number in the game area
     if (score > maxTileAmt ){
+        // get the oldest tile from the collection of tiles and remove it
         let addedTile = document.getElementById("tiles").firstChild
         addedTile.remove()
     }
-    // // makes sure there is a tile available to remove
-    // if (addedTile != null){
-    //     // remove the tile after the "tileMoveTime" - Time it takes for tile to travel across game area
-    //     addedTile.remove()  
-    // }
 }
 
 // function to add the correct class to the generated tile 
@@ -481,6 +476,8 @@ function tileCollisionCheck(){
 }
 
 // SCORING 
+
+// function to update the score in the game (+1 for every tile generated)
 function scoreUpdate(){
     score += 1;
     console.log(score);

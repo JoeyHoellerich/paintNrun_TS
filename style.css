@@ -48,6 +48,20 @@ h1 {
     border: 1px solid black;
 }
 
+#score {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+}
+
+#score > * {
+    padding: 2px;
+}
+
 /* TILES */
 /* ----------------------------------------------- */
 /* container for tiles */
@@ -214,6 +228,6 @@ h1 {
         left: 600px;
     }
     100% {
-        left: -60px;
+        left: -80px;
     }
 }
