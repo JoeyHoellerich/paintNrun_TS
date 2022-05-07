@@ -46,7 +46,7 @@ body {
 
     /* Set Positioning to Relative to Move Character around Game Area */
     position: relative;
-    top: 150px;
+    top: 110px;
     /* Color for Testing - Replace with Img */
     background-color: white;
     border: 3px solid black;
@@ -211,6 +211,17 @@ body {
 .onSelect {
     border: 3px solid black;
 }
+
+/* OBSTACLES */
+/* -------------------------------- */
+/* base class for obstacle */
+.obstacle {
+    width: 20px;
+    height: 40px;
+    position: relative;
+    top: 163px; 
+}
+
 /* ANIMATIONS */
 /* ----------------------------- */
 /* jump animation for player - add/remove class for jumping*/
@@ -219,32 +230,32 @@ body {
     animation: jump 0.4s linear;
 }
 
+/* animates tiles to move from right to left */
 .moveTile {
     animation: moveTile 2s linear;
+}
+
+/* makes obstacle visible and moves obstacle from right to left (obstacle is always visible) */
+.obstacleMove {
+    background-color: rgb(245, 208, 47);
+    border: 1px solid black;  
+    animation: obstacleMove 1.5s infinite linear; 
 }
 
 @keyframes jump {
     /* player starts 150 px from top (on ground) */
     0% {
-      top: 150px;
-    }
-  
-    20% {
-      top: 110px;
+      top: 108px;
     }
   
     /* peak height 90 px off ground */
     50% {
-      top: 60px;
-    }
-  
-    80% {
-      top: 110px;
+      top: 18px;
     }
   
     /* player ends back on the ground */
     100% {
-      top: 150px;
+      top: 108px;
     }
 }
 
@@ -254,5 +265,15 @@ body {
     }
     100% {
         left: -80px;
+    }
+}
+
+@keyframes obstacleMove {
+    0% {
+        left: 580px;
+    }
+
+    100% {
+        left: -50px;
     }
 }
