@@ -124,6 +124,8 @@ function startBtnBorderSwitch(){
 function runGame(){
     //set default game area to grey
     gameArea.style.backgroundColor = defaultColor;
+    // remove any selected paint colors
+    removeSelectors();
     // reset score
     score = 0;
     // creates new player element
