@@ -1,0 +1,66 @@
+$jumpTime: 0.4s;
+$tileMoveTime: 2s;
+$obstacleMoveTime: 1.5s;
+$jumpStartTop: 108px;
+$jumpStopTop: 18px;
+$tileStartLeft: 600px;
+$tileStopLeft: -80px;
+$obstacleStartLeft: 580px;
+$obstacleStopLeft: -50px;
+
+/* ANIMATIONS */
+/* ----------------------------- */
+/* jump animation for player - add/remove class for jumping*/
+.jump {
+    /* run jump animation for 0.4 seconds, linear movement (constant speed) */
+    animation: jump $jumpTime linear;
+}
+
+/* animates tiles to move from right to left */
+.moveTile {
+    animation: moveTile $tileMoveTime linear;
+}
+
+/* makes obstacle visible and moves obstacle from right to left (obstacle is always visible) */
+.obstacleMove {
+    background-color: $obstaclePaint;
+    height: 34px;
+    border: 3px solid black;  
+    animation: obstacleMove $obstacleMoveTime linear; 
+}
+
+@keyframes jump {
+    /* player starts 150 px from top (on ground) */
+    0% {
+      top: $jumpStartTop;
+    }
+  
+    /* peak height 90 px off ground */
+    50% {
+      top: $jumpStopTop;
+    }
+  
+    /* player ends back on the ground */
+    100% {
+      top: $jumpStartTop;
+    }
+}
+
+@keyframes moveTile {
+    0% {
+        left: $tileStartLeft;
+    }
+    100% {
+        left: $tileStopLeft;
+    }
+}
+
+@keyframes obstacleMove {
+    0% {
+        left: $obstacleStartLeft;
+    }
+
+    100% {
+        left: $obstacleStopLeft;
+    }
+}

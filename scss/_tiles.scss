@@ -1,0 +1,94 @@
+@import "gameboardStyle";
+$tileSize: 50px;
+
+@mixin filledTile($paintColor){
+    background-color: $paintColor;
+    border: 3px solid black;
+    border-right: none;
+}
+
+@mixin unfilledTile($paintColor) {
+    border: 3px dashed $paintColor;
+    background-color: $background;
+}
+
+/* TILES */
+/* ----------------------------------------------- */
+/* container for tiles */
+#tiles {
+    @include borderPlusPadding(1px);
+    display: grid;
+    width: 600px;
+    height: 55px;
+    //border: 1px solid black;
+    margin: auto;
+}
+
+/* characteristics of all tiles */
+.tile {
+    grid-row: 1;
+    grid-column: 1;
+    position: relative;
+    /* Game Arena Width (starts at right end) */
+    left: 600px;
+    width: $tileSize;
+    height: $tileSize;
+}
+
+/* standard style */
+.tile0 {
+    border: 3px solid black;
+    background-color: white;
+}
+
+.tile1-filled {
+    @include filledTile($paint1); 
+    //border: 3px solid black;
+    //border-right: none;
+    //background-color: $paint1;
+}
+
+.tile1-unfilled {
+    @include unfilledTile($paint1);
+    //border: 3px dashed $paint1;
+    //background-color: $background;
+}
+
+.tile2-filled {
+    @include filledTile($paint2);
+    // border: 3px solid black;
+    // border-right: none;
+    // background-color: $paint2;
+}
+
+.tile2-unfilled {
+    @include unfilledTile($paint2);
+    // border: 3px dashed $paint2;
+    // background-color: $background;
+}
+
+.tile3-filled {
+    @include filledTile($paint3);
+    // border: 3px solid black;
+    // border-right: none;
+    // background-color: $paint3;
+}
+
+.tile3-unfilled {
+    @include unfilledTile($paint3);
+    // border: 3px dashed $paint3;
+    // background-color: $background;
+}
+
+.tile4-filled {
+    @include filledTile($paint4);
+    // border: 3px solid black;
+    // border-right: none;
+    // background-color: $paint4;
+}
+
+.tile4-unfilled {
+    @include unfilledTile($paint4);
+    // border: 3px dashed $paint4;
+    // background-color: $background;
+}

@@ -1,0 +1,21 @@
+@import "config";
+/* PAGE STYLING */
+/* ---------------------------------------- */
+h1 {
+    text-align: center;
+    font-family: sans-serif;
+    background-color: $headerColor;
+    color: rgb(0, 0, 0);
+    margin: 0;
+    padding: 10px;
+    border-bottom: 3px solid black;
+}
+
+html {
+    margin: 0;
+    background-color: $background;
+}
+
+body {
+    margin: 0;
+}

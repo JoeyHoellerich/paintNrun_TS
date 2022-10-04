@@ -1,0 +1,52 @@
+@import "gameboardStyle";
+/* PAINT SELECTOR */
+/* ----------------------------------------------- */
+/* Colors */
+/* 1. Pink ( #edadc7 ) */
+/* 2. Blue ( #00c2d1 )  */
+/* 3. Green ( #77E6AB ) */
+/* 4. Red ( #f24236 ) */
+
+/* Style for the paint Selector Container */
+#paintContainer{
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+/* Style for paint selectors */
+.paint {
+    @include borderPlusPadding(1px);
+    width: 200px;
+    height: 170px;
+    //border: 1px solid black;
+    margin: 15px;
+    /* Center Text in Paint Selectors */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/* Style for paint Selector 1 (green) */
+#paint1 {
+    background-color: $paint1;
+}
+
+#paint2 {
+    background-color: $paint2;
+}
+
+#paint3 {
+    background-color: $paint3;
+}
+
+#paint4 {
+    background-color: $paint4;
+}
+
+.onSelect {
+    @include borderPlusPadding(3px);
+}

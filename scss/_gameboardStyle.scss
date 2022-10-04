@@ -1,0 +1,89 @@
+$playerSize: 50px;
+$borderColor: black;
+$pad-10: 10px;
+
+@mixin borderPlusPadding($bWidth, $needPad: false) {
+    @if ($needPad){
+        padding: $pad-10;
+    }
+    border: $bWidth solid $borderColor
+}
+
+/* BASIC GAME ELEMENT STYLING */
+/* ---------------------------------------- */
+/* Game Area Style */
+#game {
+    @include borderPlusPadding(3px);
+    /* Set Basic Size of Game Area */
+    width: 600px;
+    height: 204px;
+    /* Center Game Area*/
+    margin: auto;
+    /* Add Border */
+    //border: 3px solid black;
+}
+
+/* Style for Playable Character */
+#player {
+    @include borderPlusPadding(3px);
+    /* Set Playable Character Size */
+    width: $playerSize;
+    height: $playerSize;
+
+    /* Set Positioning to Relative to Move Character around Game Area */
+    position: relative;
+    top: 110px;
+    /* Color for Testing - Replace with Img */
+    background-color: white;
+    //border: 3px solid black;
+}
+
+/* start button styling */
+#start {
+    @include borderPlusPadding(3px);
+    position: relative;
+    width: 250px;
+    height: 100px;
+    left: 175px;
+    top: 50px;
+    //border: 3px solid black;
+    font-family: sans-serif;
+    font-size: 2em;
+}
+
+/* retry button styling */
+#retry {
+    @include borderPlusPadding(1px);
+    position: relative;
+    width: 250px;
+    height: 100px;
+    left: 175px;
+    top: 10px;
+    //border: 1px solid black;
+}
+
+/* scoreboard container styling */
+#score {
+    display: flex;
+    justify-content: center;
+    padding: $pad-10;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+}
+
+/* Scoreboard elements (the word score + number) styling */
+#score > * {
+    @include borderPlusPadding(3px, true);
+    background-color: white;
+    //border: 3px solid black;
+}
+
+/* makes score look pretty (ish) */
+#scoreText {
+    border-right: none;
+}
+#scoreNum {
+    border-left: none;
+}

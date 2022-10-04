@@ -1,0 +1,431 @@
+/* PAGE STYLING */
+/* ---------------------------------------- */
+h1 {
+  text-align: center;
+  font-family: sans-serif;
+  background-color: rgb(25, 255, 197);
+  color: rgb(0, 0, 0);
+  margin: 0;
+  padding: 10px;
+  border-bottom: 3px solid black;
+}
+
+html {
+  margin: 0;
+  background-color: rgb(68, 68, 68);
+}
+
+body {
+  margin: 0;
+}
+
+/* BASIC GAME ELEMENT STYLING */
+/* ---------------------------------------- */
+/* Game Area Style */
+#game {
+  border: 3px solid black;
+  /* Set Basic Size of Game Area */
+  width: 600px;
+  height: 204px;
+  /* Center Game Area*/
+  margin: auto;
+  /* Add Border */
+}
+
+/* Style for Playable Character */
+#player {
+  border: 3px solid black;
+  /* Set Playable Character Size */
+  width: 50px;
+  height: 50px;
+  /* Set Positioning to Relative to Move Character around Game Area */
+  position: relative;
+  top: 110px;
+  /* Color for Testing - Replace with Img */
+  background-color: white;
+}
+
+/* start button styling */
+#start {
+  border: 3px solid black;
+  position: relative;
+  width: 250px;
+  height: 100px;
+  left: 175px;
+  top: 50px;
+  font-family: sans-serif;
+  font-size: 2em;
+}
+
+/* retry button styling */
+#retry {
+  border: 1px solid black;
+  position: relative;
+  width: 250px;
+  height: 100px;
+  left: 175px;
+  top: 10px;
+}
+
+/* scoreboard container styling */
+#score {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: center;
+  color: black;
+}
+
+/* Scoreboard elements (the word score + number) styling */
+#score > * {
+  padding: 10px;
+  border: 3px solid black;
+  background-color: white;
+}
+
+/* makes score look pretty (ish) */
+#scoreText {
+  border-right: none;
+}
+
+#scoreNum {
+  border-left: none;
+}
+
+/* BASIC GAME ELEMENT STYLING */
+/* ---------------------------------------- */
+/* Game Area Style */
+#game {
+  border: 3px solid black;
+  /* Set Basic Size of Game Area */
+  width: 600px;
+  height: 204px;
+  /* Center Game Area*/
+  margin: auto;
+  /* Add Border */
+}
+
+/* Style for Playable Character */
+#player {
+  border: 3px solid black;
+  /* Set Playable Character Size */
+  width: 50px;
+  height: 50px;
+  /* Set Positioning to Relative to Move Character around Game Area */
+  position: relative;
+  top: 110px;
+  /* Color for Testing - Replace with Img */
+  background-color: white;
+}
+
+/* start button styling */
+#start {
+  border: 3px solid black;
+  position: relative;
+  width: 250px;
+  height: 100px;
+  left: 175px;
+  top: 50px;
+  font-family: sans-serif;
+  font-size: 2em;
+}
+
+/* retry button styling */
+#retry {
+  border: 1px solid black;
+  position: relative;
+  width: 250px;
+  height: 100px;
+  left: 175px;
+  top: 10px;
+}
+
+/* scoreboard container styling */
+#score {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: center;
+  color: black;
+}
+
+/* Scoreboard elements (the word score + number) styling */
+#score > * {
+  padding: 10px;
+  border: 3px solid black;
+  background-color: white;
+}
+
+/* makes score look pretty (ish) */
+#scoreText {
+  border-right: none;
+}
+
+#scoreNum {
+  border-left: none;
+}
+
+/* TILES */
+/* ----------------------------------------------- */
+/* container for tiles */
+#tiles {
+  border: 1px solid black;
+  display: grid;
+  width: 600px;
+  height: 55px;
+  margin: auto;
+}
+
+/* characteristics of all tiles */
+.tile {
+  grid-row: 1;
+  grid-column: 1;
+  position: relative;
+  /* Game Arena Width (starts at right end) */
+  left: 600px;
+  width: 50px;
+  height: 50px;
+}
+
+/* standard style */
+.tile0 {
+  border: 3px solid black;
+  background-color: white;
+}
+
+.tile1-filled {
+  background-color: #ff3a89;
+  border: 3px solid black;
+  border-right: none;
+}
+
+.tile1-unfilled {
+  border: 3px dashed #ff3a89;
+  background-color: rgb(68, 68, 68);
+}
+
+.tile2-filled {
+  background-color: #00c2d1;
+  border: 3px solid black;
+  border-right: none;
+}
+
+.tile2-unfilled {
+  border: 3px dashed #00c2d1;
+  background-color: rgb(68, 68, 68);
+}
+
+.tile3-filled {
+  background-color: #77E6AB;
+  border: 3px solid black;
+  border-right: none;
+}
+
+.tile3-unfilled {
+  border: 3px dashed #77E6AB;
+  background-color: rgb(68, 68, 68);
+}
+
+.tile4-filled {
+  background-color: #f0d01b;
+  border: 3px solid black;
+  border-right: none;
+}
+
+.tile4-unfilled {
+  border: 3px dashed #f0d01b;
+  background-color: rgb(68, 68, 68);
+}
+
+/* BASIC GAME ELEMENT STYLING */
+/* ---------------------------------------- */
+/* Game Area Style */
+#game {
+  border: 3px solid black;
+  /* Set Basic Size of Game Area */
+  width: 600px;
+  height: 204px;
+  /* Center Game Area*/
+  margin: auto;
+  /* Add Border */
+}
+
+/* Style for Playable Character */
+#player {
+  border: 3px solid black;
+  /* Set Playable Character Size */
+  width: 50px;
+  height: 50px;
+  /* Set Positioning to Relative to Move Character around Game Area */
+  position: relative;
+  top: 110px;
+  /* Color for Testing - Replace with Img */
+  background-color: white;
+}
+
+/* start button styling */
+#start {
+  border: 3px solid black;
+  position: relative;
+  width: 250px;
+  height: 100px;
+  left: 175px;
+  top: 50px;
+  font-family: sans-serif;
+  font-size: 2em;
+}
+
+/* retry button styling */
+#retry {
+  border: 1px solid black;
+  position: relative;
+  width: 250px;
+  height: 100px;
+  left: 175px;
+  top: 10px;
+}
+
+/* scoreboard container styling */
+#score {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: center;
+  color: black;
+}
+
+/* Scoreboard elements (the word score + number) styling */
+#score > * {
+  padding: 10px;
+  border: 3px solid black;
+  background-color: white;
+}
+
+/* makes score look pretty (ish) */
+#scoreText {
+  border-right: none;
+}
+
+#scoreNum {
+  border-left: none;
+}
+
+/* PAINT SELECTOR */
+/* ----------------------------------------------- */
+/* Colors */
+/* 1. Pink ( #edadc7 ) */
+/* 2. Blue ( #00c2d1 )  */
+/* 3. Green ( #77E6AB ) */
+/* 4. Red ( #f24236 ) */
+/* Style for the paint Selector Container */
+#paintContainer {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* Style for paint selectors */
+.paint {
+  border: 1px solid black;
+  width: 200px;
+  height: 170px;
+  margin: 15px;
+  /* Center Text in Paint Selectors */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+/* Style for paint Selector 1 (green) */
+#paint1 {
+  background-color: #ff3a89;
+}
+
+#paint2 {
+  background-color: #00c2d1;
+}
+
+#paint3 {
+  background-color: #77E6AB;
+}
+
+#paint4 {
+  background-color: #f0d01b;
+}
+
+.onSelect {
+  border: 3px solid black;
+}
+
+/* OBSTACLES */
+/* -------------------------------- */
+/* base class for obstacle */
+.obstacle {
+  width: 20px;
+  height: 40px;
+  position: relative;
+  top: 163px;
+}
+
+/* ANIMATIONS */
+/* ----------------------------- */
+/* jump animation for player - add/remove class for jumping*/
+.jump {
+  /* run jump animation for 0.4 seconds, linear movement (constant speed) */
+  animation: jump 0.4s linear;
+}
+
+/* animates tiles to move from right to left */
+.moveTile {
+  animation: moveTile 2s linear;
+}
+
+/* makes obstacle visible and moves obstacle from right to left (obstacle is always visible) */
+.obstacleMove {
+  background-color: rgba(157, 67, 218, 0.8549019608);
+  height: 34px;
+  border: 3px solid black;
+  animation: obstacleMove 1.5s linear;
+}
+
+@keyframes jump {
+  /* player starts 150 px from top (on ground) */
+  0% {
+    top: 108px;
+  }
+  /* peak height 90 px off ground */
+  50% {
+    top: 18px;
+  }
+  /* player ends back on the ground */
+  100% {
+    top: 108px;
+  }
+}
+@keyframes moveTile {
+  0% {
+    left: 600px;
+  }
+  100% {
+    left: -80px;
+  }
+}
+@keyframes obstacleMove {
+  0% {
+    left: 580px;
+  }
+  100% {
+    left: -50px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
