@@ -15,4 +15,4 @@ How far can you get?
 - Get 1 point for every second the square survives
 
 ## How to Win?
-Its not about the journey, its about the destination
+Its not about the destination, its about the journey
