@@ -16,3 +16,16 @@ How far can you get?
 
 ## How to Win?
 Its not about the destination, its about the journey
+
+## Technologies
+paintNrun was created using:
+ - Typescript (converted to JS)
+ - SASS (converted to CSS)
+ - HTML
+ - A love for colors and squares
+ 
+ ## Installation + Use
+ The easiset way to play paintNrun is to download the repository, then open the index.html file in the browser of your choice. 
+ 
+ ## Contribution
+ I'm happy to accept any contributions to paintNrun. Please attempt to match existing coding styles. 
